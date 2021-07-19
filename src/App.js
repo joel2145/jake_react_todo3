@@ -2,13 +2,29 @@ import { useState } from 'react';
 import './App.css';
 
 const App = () => {
+  const [todoText, setTodoText] = useState("");
   const [todos, setTodos] = useState(["宿題", "買い物"]);
   const [dones, setDones] = useState(["洗濯", "掃除"]);
+
+  const onChangeTodoText = (e) => {
+    setTodoText(e.target.value)
+  };
+
+  const onClickAdd = () => {
+    if (todoText === "") {
+      return
+    }
+    const newTodos = [...todos, todoText];
+    setTodos(newTodos);
+    setTodoText("");
+  };
+
   return (
     <div className="body">
+
       <div className="input-area">
-        <input placeholder="TODOを入力" />
-        <button>追加</button>
+        <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText} />
+        <button onClick={onClickAdd}>追加</button>
       </div>
 
       <div className="incomplete-area">
@@ -39,6 +55,7 @@ const App = () => {
           })}
         </ul>
       </div>
+
     </div >
   );
 }
