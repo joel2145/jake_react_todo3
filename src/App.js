@@ -6,10 +6,12 @@ const App = () => {
   const [todos, setTodos] = useState(["宿題", "買い物"]);
   const [dones, setDones] = useState(["洗濯", "掃除"]);
 
+  // 入力機能
   const onChangeTodoText = (e) => {
     setTodoText(e.target.value)
   };
 
+  // 追加する関数
   const onClickAdd = () => {
     if (todoText === "") {
       return
@@ -18,10 +20,23 @@ const App = () => {
     setTodos(newTodos);
     setTodoText("");
   };
+
+  // 削除する関数
   const onClickDelete = (index) => {
     const newTodos = [...todos];
     newTodos.splice(index, 1);
     setTodos(newTodos);
+  };
+
+  // 完了する関数
+  const onClickDone = (index) => {
+    // TODOリストから削除
+    const newIncompleteTodos = [...todos];
+    newIncompleteTodos.splice(index, 1);
+    setTodos(newIncompleteTodos);
+    // 完了リストに追加
+    const newDones = [...dones, todos[index]];
+    setDones(newDones);
   };
 
   return (
@@ -39,7 +54,7 @@ const App = () => {
             return (
               <li key={text} className="list-row">
                 <p>{text}</p>
-                <button>完了</button>
+                <button onClick={() => onClickDone(index)}>完了</button>
                 <button onClick={() => onClickDelete(index)}>削除</button>
               </li>
             )
