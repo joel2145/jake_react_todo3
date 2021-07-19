@@ -3,8 +3,8 @@ import './App.css';
 
 const App = () => {
   const [todoText, setTodoText] = useState("");
-  const [todos, setTodos] = useState(["宿題", "買い物"]);
-  const [dones, setDones] = useState(["洗濯", "掃除"]);
+  const [todos, setTodos] = useState([]);
+  const [dones, setDones] = useState([]);
 
   // 入力機能
   const onChangeTodoText = (e) => {
