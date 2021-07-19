@@ -39,6 +39,17 @@ const App = () => {
     setDones(newDones);
   };
 
+  // 戻す関数
+  const onClickReturn = (index) => {
+    // 完了リストから削除
+    const newDones = [...dones];
+    newDones.splice(index, 1);
+    setDones(newDones);
+    // TODOリストに追加
+    const newIncompleteTodos = [...todos, dones[index]];
+    setTodos(newIncompleteTodos);
+  };
+
   return (
     <div className="body">
 
@@ -65,11 +76,11 @@ const App = () => {
       <div className="complete-area">
         <p className="title">完了リスト</p>
         <ul>
-          {dones.map((text) => {
+          {dones.map((text, index) => {
             return (
               <li key={text} className="list-row">
                 <p>{text}</p>
-                <button>戻す</button>
+                <button onClick={() => onClickReturn(index)}>戻す</button>
               </li>
             )
           })}
