@@ -1,9 +1,11 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [todos, setTodos] = useState(["宿題", "買い物"]);
+  const [dones, setDones] = useState(["洗濯", "掃除"]);
   return (
-    <body>
+    <div className="body">
       <div className="input-area">
         <input placeholder="TODOを入力" />
         <button>追加</button>
@@ -12,29 +14,32 @@ function App() {
       <div className="incomplete-area">
         <p className="title">TODOリスト</p>
         <ul>
-          <li className="list-row">
-            <p>ああああ</p>
-            <button>完了</button>
-            <button>削除</button>
-          </li>
-          <li className="list-row">
-            <p>いいいい</p>
-            <button>完了</button>
-            <button>削除</button>
-          </li>
+          {todos.map((text) => {
+            return (
+              <li key={text} className="list-row">
+                <p>{text}</p>
+                <button>完了</button>
+                <button>削除</button>
+              </li>
+            )
+          })}
         </ul>
       </div>
 
       <div className="complete-area">
         <p className="title">完了リスト</p>
         <ul>
-          <li className="list-row">
-            <p>ううううう</p>
-            <button>戻す</button>
-          </li>
+          {dones.map((text) => {
+            return (
+              <li key={text} className="list-row">
+                <p>{text}</p>
+                <button>戻す</button>
+              </li>
+            )
+          })}
         </ul>
       </div>
-    </body>
+    </div >
   );
 }
 
