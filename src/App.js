@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import './App.css';
 
+import { InputTodo } from "./components/inputTodo";
+import { Todo } from "./components/todo";
+import { Done } from "./components/done";
+
 const App = () => {
   const [todoText, setTodoText] = useState("");
   const [todos, setTodos] = useState([]);
   const [dones, setDones] = useState([]);
 
-  // 入力機能
+  // 入力する関数
   const onChangeTodoText = (e) => {
     setTodoText(e.target.value)
   };
@@ -53,39 +57,11 @@ const App = () => {
   return (
     <div className="body">
 
-      <div className="input-area">
-        <input placeholder="TODOを入力" value={todoText} onChange={onChangeTodoText} />
-        <button onClick={onClickAdd}>追加</button>
-      </div>
+      <InputTodo todoText={todoText} onChange={onChangeTodoText} onClick={onClickAdd} />
 
-      <div className="incomplete-area">
-        <p className="title">TODOリスト</p>
-        <ul>
-          {todos.map((text, index) => {
-            return (
-              <li key={text} className="list-row">
-                <p>{text}</p>
-                <button onClick={() => onClickDone(index)}>完了</button>
-                <button onClick={() => onClickDelete(index)}>削除</button>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+      <Todo todos={todos} onClickDone={onClickDone} onClickDelete={onClickDelete} />
 
-      <div className="complete-area">
-        <p className="title">完了リスト</p>
-        <ul>
-          {dones.map((text, index) => {
-            return (
-              <li key={text} className="list-row">
-                <p>{text}</p>
-                <button onClick={() => onClickReturn(index)}>戻す</button>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+      <Done dones={dones} onClickReturn={onClickReturn} />
 
     </div >
   );
